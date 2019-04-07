@@ -1,15 +1,8 @@
 // .env to store passwords, sql for database, enquirer for CLI user interaction 
 const env = require('dotenv').config();
 const mysql = require('mysql');
-const express = require('express');
-const app = express();
-const routes = './routes';
 const listenPort = 3001;
-
-// Setup express middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// app.use(routes);
+const http = require('http');
 
 // All the pertinent information to contact our DB
 const sqlDBConnection = mysql.createConnection({
@@ -25,8 +18,8 @@ const pullAllDBData = (request, response) => {
   const query = "SELECT * FROM sublist_sort_items"
   sqlDBConnection.query(query, (err, res) => {
     if(err) throw err;
-    console.log(response)
-    console.log(res)
+    console.log(res[0].itemID);
+    response.end(JSON.stringify(res));
   });
 };
 
@@ -34,9 +27,10 @@ const pullAllDBData = (request, response) => {
 sqlDBConnection.connect((err) => {
     if(err) throw err;
     console.log(`\nConnected to ${process.env.PORT}\n`)
-    pullAllDBData();
 });
 
-app.listen(listenPort, () => {
+const server = http.createServer(pullAllDBData);
+
+server.listen(listenPort, () => {
   console.log(`🌎 ==> API server now on port ${listenPort}!`)
-})
+});
