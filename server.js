@@ -4,15 +4,20 @@ const mysql = require('mysql');
 const listenPort = 3001;
 const express = require('express');
 const app = express();
+let sqlDBConnection;
 
 // All the pertinent information to contact our DB
-const sqlDBConnection = mysql.createConnection(process.env.JAWSDB_URL || {
-    host: 'localhost',
-    port: process.env.PORT,
-    user: 'root',
-    password: process.env.SUBLIST_PASS,
-    database: 'sublist_sortDB'
-});
+if(process.env.JAWSDB_URL) {
+  sqlDBConnection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  sqlDBConnection = mysql.createConnection({
+      host: 'localhost',
+      port: process.env.PORT,
+      user: 'root',
+      password: process.env.SUBLIST_PASS,
+      database: 'sublist_sortDB'
+  });
+};
 
 // Routes
 app.use(express.urlencoded({ extended: true }));
