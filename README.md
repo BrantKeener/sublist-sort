@@ -8,6 +8,8 @@ This utilizes a 0(n<sup>2</sup>)
 Cloning and forking with git are easy. To clone, head over to [sublist-sort](https://github.com/BrantKeener/sublist-sort) and navigate using the clone or download button. Copy the link, and perform 
 `git clone {copied link}`.
 
+If you would just like to run the full program with a DB, click on the [Sublist Heroku Link](https://lit-everglades-84165.herokuapp.com/).
+
 ### Prerequisites
 
 If you wish to simply test the data sorting methodologies, you can simply test it at [sublist-sort](https://brantkeener.github.io/sublist-sort/). This will pull up the github pages which has an array designed just like the response data from the server.
@@ -30,7 +32,7 @@ Create your new `.env` file, and add to it the following data:
 
 ```
 SUBLIST_PASS={whatever the password is for the DB you have chosen to use}
-PORT={port on which you have your DB}
+DB_PORT={port on which you have your DB}
 ```
 
 ## Deployment
