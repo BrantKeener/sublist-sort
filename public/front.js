@@ -10,9 +10,9 @@ const offLineArray =
   { itemID: 7, Item: "Item100", subItemOfID: 4 },
   { itemID: 8, Item: "Item101", subItemOfID: 4 },
   { itemID: 9, Item: "Item102", subItemOfID: 4 },
-  { itemID: 10, Item: "Item30", subItemOfID: 3 },
-  { itemID: 11, Item: "Item31", subItemOfID: 3 },
-  { itemID: 12, Item: "Item33", subItemOfID: 3 },
+  { itemID: 10, Item: "Item20", subItemOfID: 2 },
+  { itemID: 11, Item: "Item21", subItemOfID: 2 },
+  { itemID: 12, Item: "Item22", subItemOfID: 2 },
 ]
 
 // This particular function utilizes a forEach within another forEach giving it a O(n^2)
@@ -111,9 +111,9 @@ const grabData = (method) => {
     .catch(error => {
       console.log(error);
       if(method === 'On') {
-        buildListOn(sublistData);
+        buildListOn(offLineArray);
       } else if(method === 'On2') {
-        buildListOn2(sublistData);
+        buildListOn2(offLineArray);
       };
     });
 };
