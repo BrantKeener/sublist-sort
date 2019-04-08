@@ -4,7 +4,11 @@ const mysql = require('mysql');
 const listenPort = 3001;
 const express = require('express');
 const app = express();
+const generate = require('./generate');
+const length = 500;
 let sqlDBConnection;
+
+console.log(generate(length));
 
 // All the pertinent information to contact our DB
 if(process.env.JAWSDB_URL) {
