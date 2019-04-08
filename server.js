@@ -19,17 +19,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(`./public`));
 
+// This will allow us to grab the data from 
 app.get('/sublist', (req, res) => {
   const query = "SELECT * FROM sublist_sort_items";
   sqlDBConnection.query(query, (err, response) => {
-    if(err) res.end(err);
+    if(err) console.log(err);
     res.end(JSON.stringify(response));
   });
 });
 
 // // Begin the connection, and fire a function to load the list of items for sale.
 sqlDBConnection.connect((err) => {
-  if(err) res.end(err);
+  if(err) console.log(err);
     console.log(`\nConnected to ${process.env.PORT}\n`)
 });
 
