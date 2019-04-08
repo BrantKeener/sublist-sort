@@ -2,10 +2,8 @@
 const env = require('dotenv').config();
 const mysql = require('mysql');
 const listenPort = 3001;
-const http = require('http');
 const express = require('express');
 const app = express();
-const path = require('path');
 
 // All the pertinent information to contact our DB
 const sqlDBConnection = mysql.createConnection({
