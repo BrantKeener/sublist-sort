@@ -4,11 +4,10 @@ const mysql = require('mysql');
 const listenPort = 3001;
 const express = require('express');
 const app = express();
-const generate = require('./generate');
-const length = 500;
+// This was used to build a large DB to pull from
+// const generate = require('./generate');
+// const length = 150;
 let sqlDBConnection;
-
-console.log(generate(length));
 
 // All the pertinent information to contact our DB
 if(process.env.JAWSDB_URL) {
