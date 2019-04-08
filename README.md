@@ -1,7 +1,7 @@
 # sublist-sort
 
 A sorter which takes in data and sorts it into lists and sublists.
-This utilizes a 0(n<sup>2</sup>)
+This utilizes either an 0(n<sup>2</sup>), or an 0(n) methodology.
 
 ## Getting Started
 
