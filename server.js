@@ -3,6 +3,9 @@ const env = require('dotenv').config();
 const mysql = require('mysql');
 const listenPort = 3001;
 const http = require('http');
+const express = require('express');
+const app = express();
+const path = require('path');
 
 // All the pertinent information to contact our DB
 const sqlDBConnection = mysql.createConnection({
@@ -13,24 +16,26 @@ const sqlDBConnection = mysql.createConnection({
     database: 'sublist_sortDB'
 });
 
-// Function pulls and displays data;
-const pullAllDBData = (request, response) => {
-  const query = "SELECT * FROM sublist_sort_items"
-  sqlDBConnection.query(query, (err, res) => {
-    if(err) throw err;
-    console.log(res[0].itemID);
-    response.end(JSON.stringify(res));
-  });
-};
+// Routes
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(`./public`));
 
-// Begin the connection, and fire a function to load the list of items for sale.
+app.get('/sublist', (req, res) => {
+  const query = "SELECT * FROM sublist_sort_items";
+  sqlDBConnection.query(query, (err, response) => {
+    if(err) res.end(err);
+    res.end(JSON.stringify(response));
+  });
+});
+
+// // Begin the connection, and fire a function to load the list of items for sale.
 sqlDBConnection.connect((err) => {
-    if(err) throw err;
+  if(err) res.end(err);
     console.log(`\nConnected to ${process.env.PORT}\n`)
 });
 
-const server = http.createServer(pullAllDBData);
-
-server.listen(listenPort, () => {
-  console.log(`🌎 ==> API server now on port ${listenPort}!`)
+app.listen(listenPort, function () {
+	console.log(`🌎 ==> API server now on port ${listenPort}!`);
 });
+
