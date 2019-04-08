@@ -35,6 +35,8 @@ SUBLIST_PASS={whatever the password is for the DB you have chosen to use}
 DB_PORT={port on which you have your DB}
 ```
 
+A seed file with 150 items has been added to make initial testing easier.
+
 ## Deployment
 
 Deploying with a server will require a service like Heroku.
