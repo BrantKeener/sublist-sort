@@ -4,6 +4,9 @@ const mysql = require('mysql');
 const listenPort = 3001;
 const express = require('express');
 const app = express();
+// This was used to build a large DB to pull from
+// const generate = require('./generate');
+// const length = 150;
 let sqlDBConnection;
 
 // All the pertinent information to contact our DB

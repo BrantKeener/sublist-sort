@@ -15,6 +15,8 @@ const offLineArray =
   { itemID: 12, Item: "Item22", subItemOfID: 2 },
 ]
 
+const timeArray = [];
+
 // This particular function utilizes a forEach within another forEach giving it a O(n^2)
 const buildListOn2 = (data) => {
   const list = document.createElement('ol');
@@ -58,6 +60,7 @@ const buildListOn2 = (data) => {
       });
     };
   });
+  console.timeEnd();
 };
 
 // An O(n) function with 3 forEach loops, and zero nested loops.
@@ -91,10 +94,12 @@ const buildListOn = (data) => {
     subListItem.id = element.itemID;
     subList.appendChild(subListItem);
     itemParent.appendChild(subList);
-  })
+  });
+  console.timeEnd();
 };
 
 const grabData = (method) => {
+  console.time();
   let sublistData;
   fetch('/sublist')
     .then((response) => {
