@@ -2,6 +2,7 @@
 
 A sorter which takes in data and sorts it into lists and sublists.
 This utilizes either an 0(n<sup>2</sup>), or an 0(n) methodology.
+Console.time() has been added to allow the user to see how quickly the process is being completed. This timer monitors from DB call to completion of DOM rendering.
 
 ## Getting Started
 
