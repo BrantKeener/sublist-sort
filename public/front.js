@@ -1,70 +1,4 @@
 
-// const buildList = (data) => {
-//   const list = document.createElement('ol');
-//   const div = document.getElementById('list-div');
-//   div.append(list);
-//   data.forEach(datum => {
-//     const listItem = document.createElement('li');
-//     let subItemOf = datum.subItemOfID; 
-//     if(subItemOf === 0) {
-//       listItem.textContent = datum.Item;
-//       list.appendChild(listItem);
-//     };
-//   });
-// };
-
-// const buildList = (data) => {
-//   const list = document.createElement('ol');
-//   const div = document.getElementById('list-div');
-//   const topLevel = [];
-//   div.append(list);
-//   data.forEach(datum => {
-//     console.log(datum);
-//     if(datum.subItemOfID === 0) {
-//       topLevel.push(datum);
-//     }
-//     // const listItem = document.createElement('li');
-//     // let subItemOf = datum.subItemOfID; 
-//     // subItemOfID.push(datum.subItemOfID);
-//   });
-//   console.log(topLevel);
-// };
-
-// const buildList = (data) => {
-//   const list = document.createElement('ol');
-//   const div = document.getElementById('list-div');
-//   const mergedDataArray = [];
-//   div.append(list);
-//   data.forEach(datum => {
-//     const newDataObject = 
-//       {
-//         Item: datum.Item,
-//         parentItem: datum.subItemOfID,
-//         subItems: []
-//       };
-//     data.forEach(element => {
-//       if(datum.itemID === element.subItemOfID) {
-//         newDataObject.subItems.push(element.Item);
-//       };
-//     });
-//     mergedDataArray.push(newDataObject);
-//   });
-//   mergedDataArray.forEach(element => {
-//     const listItem = document.createElement('li');
-//     if(element.parentItem === 0) {
-//       listItem.textContent = element.Item;
-//       list.appendChild(listItem);
-//       div.append(list);
-//     };
-//     if(element.subItems)
-//     // } else {
-//     //   forEach(element => {
-
-//     //   })
-//     // }
-//   });
-// };
-
 const buildList = (data) => {
   const list = document.createElement('ol');
   const div = document.getElementById('list-div');
@@ -85,7 +19,6 @@ const buildList = (data) => {
     });
     mergedDataArray.push(newDataObject);
   });
-  console.log(mergedDataArray);
   mergedDataArray.forEach(element => {
     const listItem = document.createElement('li');
     if(element.parentItem === 0) {
