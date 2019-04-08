@@ -58,7 +58,6 @@ const buildList = (data) => {
   });
 };
 
-
 (grabData = () => {
   let sublistData;
   fetch('/sublist')
