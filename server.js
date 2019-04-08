@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 
 // All the pertinent information to contact our DB
-const sqlDBConnection = mysql.createConnection({
+const sqlDBConnection = mysql.createConnection(process.env.JAWSDB_URL || {
     host: 'localhost',
     port: process.env.PORT,
     user: 'root',
