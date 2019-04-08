@@ -16,11 +16,12 @@ const offLineArray =
 ]
 
 // This particular function utilizes a forEach within another forEach giving it a O(n^2)
-const buildList = (data) => {
+const buildListOn2 = (data) => {
   const list = document.createElement('ol');
   const div = document.getElementById('list-div');
   const mergedDataArray = [];
   div.append(list);
+  // Build a new object that will tell us if a parent has subitems
   data.forEach(datum => {
     const newDataObject = 
       {
@@ -36,6 +37,7 @@ const buildList = (data) => {
     });
     mergedDataArray.push(newDataObject);
   });
+  // Look through the newly merged data, and build the toplevel list if it has no parent items, or sublists if it does.
   mergedDataArray.forEach(element => {
     const listItem = document.createElement('li');
     if(element.parentItem === 0) {
@@ -58,7 +60,41 @@ const buildList = (data) => {
   });
 };
 
-(grabData = () => {
+// An O(n) function with 3 forEach loops, and zero nested loops.
+const buildListOn = (data) => {
+  const subItemArray = [];
+  const topLevelArray = [];
+  const list = document.createElement('ol');
+  const div = document.getElementById('list-div');
+  // Seperate subitems from top level items for faster loopin later
+  data.forEach(datum => {
+    if(datum.subItemOfID !== 0) {
+      subItemArray.push(datum);
+    } else {
+      topLevelArray.push(datum);
+    };
+  });
+  // Build our top level list
+  topLevelArray.forEach(element => {
+    const listItem = document.createElement('li');
+    listItem.textContent = element.Item;
+    listItem.id = element.itemID;
+    list.appendChild(listItem);
+    div.appendChild(list);
+  });
+  // Add all the subitems to the top level list
+  subItemArray.forEach(element => {
+    const itemParent = document.getElementById(element.subItemOfID);
+    const subList = document.createElement('ol');
+    const subListItem = document.createElement('li');
+    subListItem.textContent = element.Item;
+    subListItem.id = element.itemID;
+    subList.appendChild(subListItem);
+    itemParent.appendChild(subList);
+  })
+};
+
+const grabData = (method) => {
   let sublistData;
   fetch('/sublist')
     .then((response) => {
@@ -66,10 +102,34 @@ const buildList = (data) => {
     })
     .then((myJson) => {
       sublistData = myJson;
-      buildList(sublistData);
+      if(method === 'On') {
+        buildListOn(sublistData);
+      } else if(method === 'On2') {
+        buildListOn2(sublistData);
+      };
     })
     .catch(error => {
       console.log(error);
-      buildList(offLineArray);
+      if(method === 'On') {
+        buildListOn(sublistData);
+      } else if(method === 'On2') {
+        buildListOn2(sublistData);
+      };
     });
-})();
+};
+
+document.addEventListener('click', (event) => {
+  const { id } = event.target;
+  if(id === 'query-db') {
+    const selection = document.getElementById('method-select').value;
+    const div = document.getElementById('list-div');
+    while(div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    if(selection === 'O(n)') {
+      grabData('On');
+    } else if(selection === 'O(n2)') {
+      grabData('On2');
+    };
+  };
+});
