@@ -1,3 +1,4 @@
+// This array is utilized when no database can be found (ie with github pages)
 const offLineArray = 
 [
   { itemID: 1, Item: "Item1", subItemOfID: 0 },
@@ -14,6 +15,7 @@ const offLineArray =
   { itemID: 12, Item: "Item33", subItemOfID: 3 },
 ]
 
+// This particular function utilizes a forEach within another forEach giving it a O(n^2)
 const buildList = (data) => {
   const list = document.createElement('ol');
   const div = document.getElementById('list-div');
