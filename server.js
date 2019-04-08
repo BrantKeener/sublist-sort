@@ -39,7 +39,7 @@ sqlDBConnection.connect((err) => {
     console.log(`\nConnected to ${process.env.PORT}\n`)
 });
 
-app.listen(listenPort, function () {
+app.listen(process.env.PORT || listenPort, function () {
 	console.log(`🌎 ==> API server now on port ${listenPort}!`);
 });
 
