@@ -12,7 +12,7 @@ if(process.env.JAWSDB_URL) {
 } else {
   sqlDBConnection = mysql.createConnection({
       host: 'localhost',
-      port: process.env.PORT,
+      port: process.env.DB_PORT,
       user: 'root',
       password: process.env.SUBLIST_PASS,
       database: 'sublist_sortDB'
@@ -36,10 +36,9 @@ app.get('/sublist', (req, res) => {
 // // Begin the connection, and fire a function to load the list of items for sale.
 sqlDBConnection.connect((err) => {
   if(err) console.log(err);
-    console.log(`\nConnected to ${process.env.PORT}\n`)
+    console.log(`\nConnected to ${process.env.DB_PORT}\n`)
 });
 
 app.listen(process.env.PORT || listenPort, function () {
 	console.log(`🌎 ==> API server now on port ${listenPort}!`);
 });
-
